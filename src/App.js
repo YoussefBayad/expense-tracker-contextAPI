@@ -1,10 +1,12 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import './App.css';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'increment':
-      return state + 1;
+    case 'add_todo':
+      return {
+        todos: [...state.todos, { text: action.text, completed: false }],
+      };
     case 'decrement':
       return state - 1;
     default:
@@ -13,12 +15,27 @@ const reducer = (state, action) => {
 };
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, 0);
+  const [{ todos }, dispatch] = useReducer(reducer, { todos: [] });
+  const [text, setText] = useState('');
   return (
     <div className="App">
-      <h1>{state}</h1>
-      <button onClick={() => dispatch({ type: 'increment' })}>increment</button>
-      <button onClick={() => dispatch({ type: 'decrement' })}>decrement</button>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch({ type: 'add_todo', text });
+        }}
+      >
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+      </form>
+      <div>
+        {todos.map((todo) => (
+          <li key={todo.text}>{todo.text}</li>
+        ))}
+      </div>
     </div>
   );
 }
