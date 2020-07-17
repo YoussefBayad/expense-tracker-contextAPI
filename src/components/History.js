@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 const History = () => {
-  const { transaction } = useContext(GlobalContext);
+  const { transaction, deleteTransaction } = useContext(GlobalContext);
   return (
     <div>
       <h3>History</h3>
@@ -10,7 +10,12 @@ const History = () => {
           <li className={item.amount > 0 ? 'plus' : 'minus'}>
             <p>{item.name}</p>
             <p>{item.amount}$</p>
-            <button className="delete-btn">X</button>
+            <button
+              className="delete-btn"
+              onClick={() => deleteTransaction(item.id)}
+            >
+              X
+            </button>
           </li>
         ))}
       </ul>

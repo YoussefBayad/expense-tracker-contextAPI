@@ -8,8 +8,9 @@ const Balance = () => {
     .reduce((acc, amount) => (acc += amount));
   const expense = amounts
     .filter((amount) => amount < 0)
-    .reduce((acc, amount) => (acc += amount));
-  const balance = amounts.reduce((acc, amount) => (acc += amount));
+    .reduce((acc, amount) => (acc += amount), 0);
+  const balance = amounts.reduce((acc, amount) => (acc += amount), 0);
+
   return (
     <div>
       <div className="balance">
