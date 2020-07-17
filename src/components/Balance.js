@@ -5,7 +5,7 @@ const Balance = () => {
   const amounts = transaction.map((item) => item.amount);
   const income = amounts
     .filter((amount) => amount > 0)
-    .reduce((acc, amount) => (acc += amount));
+    .reduce((acc, amount) => (acc += amount), 0);
   const expense = amounts
     .filter((amount) => amount < 0)
     .reduce((acc, amount) => (acc += amount), 0);

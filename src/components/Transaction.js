@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { GlobalContext } from '../context/GlobalContext';
 const Transaction = () => {
+  const { addTransaction } = useContext(GlobalContext);
   const [name, setName] = useState('');
   const [amount, setAmount] = useState(0);
+  const [id, setId] = useState(0);
   return (
     <div>
       <h3>Add New Transaction</h3>
@@ -23,7 +26,16 @@ const Transaction = () => {
           placeholder="Enter text..."
           required
         />
-        <button className="btn">Add Transaction</button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            addTransaction(name, amount, id);
+            setId(id + 1);
+          }}
+          className="btn"
+        >
+          Add Transaction
+        </button>
       </form>
     </div>
   );

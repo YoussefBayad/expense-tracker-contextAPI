@@ -6,6 +6,13 @@ export default (state, action) => {
           ...state.transaction.filter((item) => item.id !== action.id),
         ],
       };
+    case 'ADD':
+      return {
+        transaction: [
+          ...state.transaction,
+          { name: action.name, amount: action.amount, id: action.id },
+        ],
+      };
     default:
       return state;
   }
